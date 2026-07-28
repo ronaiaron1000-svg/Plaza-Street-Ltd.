@@ -1,88 +1,588 @@
-<section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<h1 class="title">
-🚀 Development Progress
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Plaza Street Ltd.</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#080812;
+color:white;
+}
+
+
+/* HERO */
+
+header{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+background:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.8)
+),
+url("plaza-background.jpg");
+
+background-size:cover;
+background-position:center;
+
+}
+
+
+.hero h1{
+
+font-size:75px;
+letter-spacing:5px;
+
+}
+
+.hero span{
+
+color:#4da6ff;
+
+}
+
+
+.hero p{
+
+margin-top:20px;
+font-size:24px;
+
+}
+
+
+button{
+
+margin-top:35px;
+
+padding:16px 45px;
+
+border:none;
+
+border-radius:40px;
+
+background:#5865F2;
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+button:hover{
+
+transform:scale(1.08);
+
+}
+
+
+a{
+text-decoration:none;
+}
+
+
+
+/* SECTIONS */
+
+section{
+
+padding:80px 10%;
+
+}
+
+
+.title{
+
+text-align:center;
+
+font-size:45px;
+
+margin-bottom:50px;
+
+}
+
+
+
+/* CARDS */
+
+
+.cards{
+
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+
+}
+
+
+.card{
+
+width:320px;
+
+background:#151522;
+
+padding:35px;
+
+border-radius:25px;
+
+box-shadow:0 0 25px black;
+
+}
+
+
+.card h2{
+
+color:#4da6ff;
+
+margin-bottom:15px;
+
+}
+
+
+.card p{
+
+color:#ccc;
+
+line-height:1.6;
+
+}
+
+
+
+/* DEVELOPMENT */
+
+
+.progress-box{
+
+max-width:900px;
+
+margin:auto;
+
+background:#151522;
+
+padding:50px;
+
+border-radius:30px;
+
+box-shadow:0 0 30px black;
+
+}
+
+
+.progress-bar{
+
+height:14px;
+
+background:#333;
+
+border-radius:20px;
+
+position:relative;
+
+}
+
+
+/* 0% progress */
+
+.progress-fill{
+
+width:0%;
+
+height:100%;
+
+background:#4da6ff;
+
+border-radius:20px;
+
+}
+
+
+
+.point{
+
+position:absolute;
+
+top:-13px;
+
+width:40px;
+
+height:40px;
+
+border-radius:50%;
+
+background:#111;
+
+border:4px solid #555;
+
+text-align:center;
+
+line-height:32px;
+
+}
+
+
+
+.point span{
+
+position:absolute;
+
+top:45px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+white-space:nowrap;
+
+color:#ccc;
+
+}
+
+
+
+.current{
+
+border-color:#4da6ff;
+
+box-shadow:0 0 25px #4da6ff;
+
+}
+
+
+
+.future{
+
+border-color:#777;
+
+}
+
+
+
+
+.status{
+
+margin-top:80px;
+
+text-align:center;
+
+color:#4da6ff;
+
+font-size:25px;
+
+}
+
+
+
+
+.phase{
+
+margin-top:25px;
+
+background:#10101a;
+
+padding:25px;
+
+border-radius:20px;
+
+border-left:5px solid #4da6ff;
+
+}
+
+
+.phase h2{
+
+color:#4da6ff;
+
+margin-bottom:10px;
+
+}
+
+
+.phase p{
+
+color:#ccc;
+
+line-height:1.5;
+
+}
+
+
+
+footer{
+
+background:#050509;
+
+text-align:center;
+
+padding:35px;
+
+color:#aaa;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+<div class="hero">
+
+
+<h1>
+PLAZA <span>STREET</span> LTD.
 </h1>
 
 
-<div class="progress-box">
-
-<h2 id="phase-title">
-Phase 1 - Community Setup
-</h2>
-
-<p id="phase-text">
-Currently building the official Plaza Street Ltd. Discord server,
-roles, channels and community systems.
+<p>
+🏢 A community-built Roblox shopping experience
 </p>
 
 
-<input 
-type="range" 
-min="1" 
-max="3" 
-value="1" 
-id="progressSlider"
->
+<p>
+🚧 Currently under development
+</p>
 
 
-<div class="phases">
 
-<span>🏢 Phase 1</span>
-<span>🏗️ Phase 2</span>
-<span>🏬 Phase 3</span>
+<a href="https://discord.gg/CJvNxUkuCY" target="_blank">
+
+<button>
+💬 Join Our Community
+</button>
+
+</a>
+
 
 </div>
+
+</header>
+
+
+
+
+
+<section>
+
+
+<h1 class="title">
+🌆 About Plaza Street Ltd.
+</h1>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h2>🏬 The Plaza</h2>
+
+<p>
+A huge modern shopping plaza with different stores,
+restaurants and unique experiences.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>🏗️ Create Your Store</h2>
+
+<p>
+Players will be able to apply for their own stores
+and ideas inside the game.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>💡 Community Driven</h2>
+
+<p>
+The community helps shape the future of Plaza Street Ltd.
+</p>
+
+</div>
+
 
 </div>
 
 </section>
 
 
-<script>
-
-const slider = document.getElementById("progressSlider");
-
-const title = document.getElementById("phase-title");
-const text = document.getElementById("phase-text");
-
-
-slider.oninput = function(){
-
-if(this.value == 1){
-
-title.innerHTML =
-"Phase 1 - Community Setup 🏢";
-
-text.innerHTML =
-"Currently building the official Discord server, roles, channels and community systems.";
-
-}
-
-
-if(this.value == 2){
-
-title.innerHTML =
-"Phase 2 - Game Development 🏗️";
-
-text.innerHTML =
-"Creating the first plaza buildings, basic systems and the foundation of the Roblox experience.";
-
-}
 
 
 
-if(this.value == 3){
-
-title.innerHTML =
-"Phase 3 - Community Creation 🏬";
-
-text.innerHTML =
-"Opening applications where players can create their own stores and bring ideas into the game.";
-
-}
 
 
-}
+<section>
 
-</script>
+
+<h1 class="title">
+🚀 Development Progress
+</h1>
+
+
+
+<div class="progress-box">
+
+
+<div class="progress-bar">
+
+
+<div class="progress-fill"></div>
+
+
+<div class="point current" style="left:0%">
+●
+<span>Phase 1</span>
+</div>
+
+
+<div class="point future" style="left:33%">
+○
+<span>Phase 2</span>
+</div>
+
+
+<div class="point future" style="left:66%">
+○
+<span>Phase 3</span>
+</div>
+
+
+<div class="point future" style="left:100%">
+○
+<span>Release</span>
+</div>
+
+
+</div>
+
+
+
+
+<h2 class="status">
+
+🔵 Currently working on:
+<br>
+Phase 1 - Community Setup
+
+<br><br>
+
+Progress: 0%
+
+</h2>
+
+
+
+
+<div class="phase">
+
+<h2>🏢 Phase 1 - Community Setup</h2>
+
+<p>
+Creating the official Discord server, channels,
+roles and community systems.
+</p>
+
+</div>
+
+
+
+<div class="phase">
+
+<h2>🏗️ Phase 2 - Game Foundation</h2>
+
+<p>
+Building the first Roblox systems, basic mechanics
+and the foundation of Plaza Street Ltd.
+</p>
+
+</div>
+
+
+
+<div class="phase">
+
+<h2>🏬 Phase 3 - Plaza Creation</h2>
+
+<p>
+Creating the main shopping plaza, stores,
+and unique player experiences.
+</p>
+
+</div>
+
+
+
+<div class="phase">
+
+<h2>🚀 Phase 4 - Official Release</h2>
+
+<p>
+Opening the game for everyone and launching
+the complete Plaza Street Ltd. experience.
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<footer>
+
+🏢 Plaza Street Ltd.<br>
+
+🌆 Building the future of Roblox communities.
+
+</footer>
+
+
+
+</body>
+</html>
