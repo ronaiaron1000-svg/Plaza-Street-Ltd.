@@ -41,7 +41,7 @@ align-items:center;
 
 text-align:center;
 
-padding:20px;
+padding:90px 20px 20px;
 
 background:
 linear-gradient(
@@ -120,6 +120,154 @@ outline-offset:4px;
 
 a{
 text-decoration:none;
+}
+
+
+
+/* DISCORD LOCK BANNER */
+
+.lockbar{
+
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:100;
+
+background:#1a0f12;
+border-bottom:2px solid #ff4d5e;
+
+overflow:hidden;
+
+animation:lockdrop .8s ease-out;
+
+}
+
+
+.lockbar::before{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background:linear-gradient(
+-45deg,
+rgba(255,77,94,.18) 25%,
+transparent 25%,
+transparent 50%,
+rgba(255,77,94,.18) 50%,
+rgba(255,77,94,.18) 75%,
+transparent 75%
+);
+
+background-size:40px 40px;
+
+animation:lockstripes 1.6s linear infinite;
+
+}
+
+
+.lockbar[hidden]{
+display:none;
+}
+
+
+.lockbar-inner{
+
+position:relative;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:8px 14px;
+
+padding:12px 16px;
+
+text-align:center;
+
+color:#ffd9dd;
+
+line-height:1.4;
+
+}
+
+
+.lock-ico{
+
+display:inline-block;
+
+font-size:22px;
+
+animation:lockwiggle 3s ease-in-out infinite;
+
+}
+
+
+.lock-count{
+
+padding:4px 12px;
+
+border-radius:20px;
+
+background:rgba(255,77,94,.25);
+
+color:white;
+
+font-weight:bold;
+
+font-variant-numeric:tabular-nums;
+
+white-space:nowrap;
+
+}
+
+
+@keyframes lockdrop{
+
+from{ transform:translateY(-100%); }
+to{ transform:translateY(0); }
+
+}
+
+
+@keyframes lockstripes{
+
+from{ background-position:0 0; }
+to{ background-position:40px 0; }
+
+}
+
+
+@keyframes lockwiggle{
+
+0%, 70%, 100%{ transform:rotate(0); }
+75%{ transform:rotate(-14deg); }
+80%{ transform:rotate(12deg); }
+85%{ transform:rotate(-8deg); }
+90%{ transform:rotate(5deg); }
+
+}
+
+
+/* DISABLED JOIN BUTTON */
+
+.btn.disabled{
+
+background:#3a3a4d;
+
+color:#9a9aae;
+
+cursor:not-allowed;
+
+}
+
+
+.btn.disabled:hover{
+
+transform:none;
+
 }
 
 
@@ -430,6 +578,12 @@ margin-top:70px;
 transition:none;
 }
 
+.lockbar,
+.lockbar::before,
+.lock-ico{
+animation:none;
+}
+
 }
 
 
@@ -440,6 +594,24 @@ transition:none;
 
 <body>
 
+
+
+<div class="lockbar" id="lockbar" role="status" hidden>
+
+<div class="lockbar-inner">
+
+<span class="lock-ico" aria-hidden="true">🔒</span>
+
+<span>
+<strong>The Discord server is temporarily closed.</strong>
+It reopens on Saturday, 14 November at 13:00 (Hungarian time).
+</span>
+
+<span class="lock-count" id="lockCount"></span>
+
+</div>
+
+</div>
 
 
 <header>
@@ -463,7 +635,7 @@ PLAZA <span>STREET</span> LTD.
 
 
 
-<a class="btn" href="https://discord.gg/CJvNxUkuCY" target="_blank" rel="noopener noreferrer">
+<a class="btn" id="joinBtn" href="https://discord.gg/CJvNxUkuCY" target="_blank" rel="noopener noreferrer">
 💬 Join Our Community
 </a>
 
@@ -572,7 +744,7 @@ The community helps shape the future of Plaza Street Ltd.
 
 <div class="point future" data-point="4" style="left:100%">
 ○
-<span>RELEASE</span>
+<span>Phase 4</span>
 </div>
 
 
@@ -749,6 +921,68 @@ fetch("progress.json", { cache: "no-store" })
   .then(function(r){ return r.ok ? r.json() : null; })
   .then(function(data){ if (data) render(data); })
   .catch(function(){});
+
+
+/* ===== DISCORD LOCK =====
+   The Discord server is closed until this moment.
+   After it passes, the banner disappears and the button turns on by itself.
+   To remove the lock completely, set DISCORD_REOPENS_AT = null.
+*/
+
+var DISCORD_REOPENS_AT = "2026-11-14T13:00:00+01:00";
+
+(function(){
+
+  var btn = document.getElementById("joinBtn");
+  var bar = document.getElementById("lockbar");
+  var count = document.getElementById("lockCount");
+  var link = btn.getAttribute("href");
+  var openText = btn.textContent.trim();
+  var timer = null;
+
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+
+  function lock(){
+    bar.hidden = false;
+    btn.classList.add("disabled");
+    btn.removeAttribute("href");
+    btn.setAttribute("aria-disabled", "true");
+    btn.textContent = "🔒 Server closed";
+  }
+
+  function unlock(){
+    bar.hidden = true;
+    btn.classList.remove("disabled");
+    btn.setAttribute("href", link);
+    btn.removeAttribute("aria-disabled");
+    btn.textContent = openText;
+    if (timer) clearInterval(timer);
+  }
+
+  function tick(){
+
+    var left = DISCORD_REOPENS_AT ? new Date(DISCORD_REOPENS_AT).getTime() - Date.now() : 0;
+
+    if (!(left > 0)){ unlock(); return; }
+
+    var s = Math.floor(left / 1000);
+    var h = Math.floor(s / 3600);
+    var m = Math.floor((s % 3600) / 60);
+
+    count.textContent = "Reopens in " + pad(h) + ":" + pad(m) + ":" + pad(s % 60);
+
+    lock();
+
+  }
+
+  btn.addEventListener("click", function(e){
+    if (btn.classList.contains("disabled")) e.preventDefault();
+  });
+
+  tick();
+  timer = setInterval(tick, 1000);
+
+})();
 
 </script>
 
