@@ -7,6 +7,12 @@
 
 <title>Plaza Street Ltd.</title>
 
+<meta name="description" content="Plaza Street Ltd. - a community-built Roblox shopping experience, currently under development.">
+<meta property="og:title" content="Plaza Street Ltd.">
+<meta property="og:description" content="A community-built Roblox shopping experience. Currently under development.">
+<meta property="og:image" content="plaza-background.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+
 <style>
 
 *{
@@ -26,13 +32,16 @@ color:white;
 
 header{
 
-height:100vh;
+min-height:100vh;
+min-height:100svh;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
 text-align:center;
+
+padding:20px;
 
 background:
 linear-gradient(
@@ -49,7 +58,7 @@ background-position:center;
 
 .hero h1{
 
-font-size:75px;
+font-size:clamp(36px, 8vw, 75px);
 letter-spacing:5px;
 
 }
@@ -69,13 +78,15 @@ font-size:24px;
 }
 
 
-button{
+/* JOIN BUTTON (link styled as button) */
+
+.btn{
+
+display:inline-block;
 
 margin-top:35px;
 
 padding:16px 45px;
-
-border:none;
 
 border-radius:40px;
 
@@ -92,9 +103,17 @@ transition:.3s;
 }
 
 
-button:hover{
+.btn:hover{
 
 transform:scale(1.08);
+
+}
+
+
+.btn:focus-visible{
+
+outline:3px solid white;
+outline-offset:4px;
 
 }
 
@@ -154,7 +173,9 @@ box-shadow:0 0 25px black;
 }
 
 
-.card h2{
+.card h3{
+
+font-size:1.5em;
 
 color:#4da6ff;
 
@@ -203,10 +224,12 @@ border-radius:20px;
 
 position:relative;
 
+margin:0 20px;
+
 }
 
 
-/* 0% progress */
+/* width is set by the script (overall progress) */
 
 .progress-fill{
 
@@ -217,6 +240,8 @@ height:100%;
 background:#4da6ff;
 
 border-radius:20px;
+
+transition:width .8s ease;
 
 }
 
@@ -242,6 +267,8 @@ text-align:center;
 
 line-height:32px;
 
+transform:translateX(-50%);
+
 }
 
 
@@ -259,6 +286,14 @@ transform:translateX(-50%);
 white-space:nowrap;
 
 color:#ccc;
+
+}
+
+
+
+.done{
+
+border-color:#4da6ff;
 
 }
 
@@ -293,6 +328,8 @@ color:#4da6ff;
 
 font-size:25px;
 
+font-weight:bold;
+
 }
 
 
@@ -313,7 +350,9 @@ border-left:5px solid #4da6ff;
 }
 
 
-.phase h2{
+.phase h3{
+
+font-size:1.5em;
 
 color:#4da6ff;
 
@@ -341,6 +380,55 @@ text-align:center;
 padding:35px;
 
 color:#aaa;
+
+}
+
+
+
+/* MOBILE */
+
+@media (max-width:600px){
+
+section{
+padding:60px 5%;
+}
+
+.title{
+font-size:32px;
+margin-bottom:35px;
+}
+
+.hero p{
+font-size:20px;
+}
+
+.btn{
+padding:14px 32px;
+font-size:18px;
+}
+
+.progress-box{
+padding:30px 20px;
+}
+
+.point span{
+font-size:12px;
+}
+
+.status{
+font-size:20px;
+margin-top:70px;
+}
+
+}
+
+
+@media (prefers-reduced-motion:reduce){
+
+.btn,
+.progress-fill{
+transition:none;
+}
 
 }
 
@@ -375,12 +463,8 @@ PLAZA <span>STREET</span> LTD.
 
 
 
-<a href="https://discord.gg/CJvNxUkuCY" target="_blank">
-
-<button>
+<a class="btn" href="https://discord.gg/CJvNxUkuCY" target="_blank" rel="noopener noreferrer">
 💬 Join Our Community
-</button>
-
 </a>
 
 
@@ -395,9 +479,9 @@ PLAZA <span>STREET</span> LTD.
 <section>
 
 
-<h1 class="title">
+<h2 class="title">
 🌆 About Plaza Street Ltd.
-</h1>
+</h2>
 
 
 <div class="cards">
@@ -405,7 +489,7 @@ PLAZA <span>STREET</span> LTD.
 
 <div class="card">
 
-<h2>🏬 The Plaza</h2>
+<h3>🏬 The Plaza</h3>
 
 <p>
 A huge modern shopping plaza with different stores,
@@ -418,7 +502,7 @@ restaurants and unique experiences.
 
 <div class="card">
 
-<h2>🏗️ Create Your Store</h2>
+<h3>🏗️ Create Your Store</h3>
 
 <p>
 Players will be able to apply for their own stores
@@ -431,7 +515,7 @@ and ideas inside the game.
 
 <div class="card">
 
-<h2>💡 Community Driven</h2>
+<h3>💡 Community Driven</h3>
 
 <p>
 The community helps shape the future of Plaza Street Ltd.
@@ -453,9 +537,9 @@ The community helps shape the future of Plaza Street Ltd.
 <section>
 
 
-<h1 class="title">
+<h2 class="title">
 🚀 Development Progress
-</h1>
+</h2>
 
 
 
@@ -465,30 +549,30 @@ The community helps shape the future of Plaza Street Ltd.
 <div class="progress-bar">
 
 
-<div class="progress-fill"></div>
+<div class="progress-fill" id="fill"></div>
 
 
-<div class="point current" style="left:0%">
+<div class="point current" data-point="1" style="left:0%">
 ●
 <span>Phase 1</span>
 </div>
 
 
-<div class="point future" style="left:33%">
+<div class="point future" data-point="2" style="left:33.33%">
 ○
 <span>Phase 2</span>
 </div>
 
 
-<div class="point future" style="left:66%">
+<div class="point future" data-point="3" style="left:66.66%">
 ○
 <span>Phase 3</span>
 </div>
 
 
-<div class="point future" style="left:100%">
+<div class="point future" data-point="4" style="left:100%">
 ○
-<span>Release</span>
+<span>Phase 4</span>
 </div>
 
 
@@ -497,7 +581,7 @@ The community helps shape the future of Plaza Street Ltd.
 
 
 
-<h2 class="status">
+<p class="status" id="status">
 
 🔵 Currently working on:
 <br>
@@ -507,14 +591,14 @@ Phase 1 - Community Setup
 
 Progress: 65%
 
-</h2>
+</p>
 
 
 
 
-<div class="phase">
+<div class="phase" data-phase="1" data-name="Community Setup">
 
-<h2>🏢 Phase 1 - Community Setup (Current)</h2>
+<h3>🏢 Phase 1 - Community Setup (Current)</h3>
 
 <p>
 Creating the official Discord server, channels,
@@ -525,9 +609,9 @@ roles and community systems.
 
 
 
-<div class="phase">
+<div class="phase" data-phase="2" data-name="Game Foundation">
 
-<h2>🏗️ Phase 2 - Game Foundation</h2>
+<h3>🏗️ Phase 2 - Game Foundation</h3>
 
 <p>
 Building the first Roblox systems, basic mechanics
@@ -538,9 +622,9 @@ and the foundation of Plaza Street Ltd.
 
 
 
-<div class="phase">
+<div class="phase" data-phase="3" data-name="Plaza Creation">
 
-<h2>🏬 Phase 3 - Plaza Creation</h2>
+<h3>🏬 Phase 3 - Plaza Creation</h3>
 
 <p>
 Creating the main shopping plaza, stores,
@@ -551,9 +635,9 @@ and unique player experiences.
 
 
 
-<div class="phase">
+<div class="phase" data-phase="4" data-name="Official Release">
 
-<h2>🚀 Phase 4 - Official Release</h2>
+<h3>🚀 Phase 4 - Official Release</h3>
 
 <p>
 Opening the game for everyone and launching
@@ -583,6 +667,90 @@ the complete Plaza Street Ltd. experience.
 </footer>
 
 
+
+<script>
+
+/*
+  ===== EDIT ONLY THIS PART (or progress.json next to this file) =====
+  phase   = which phase you are in now (1-4)
+  percent = how far along you are in THAT phase (0-100)
+*/
+
+var PROGRESS = {
+  phase: 1,
+  percent: 65
+};
+
+/* ===================================================================== */
+
+
+function render(p){
+
+  var phase = Math.min(4, Math.max(1, Math.round(Number(p.phase)) || 1));
+  var percent = Math.min(100, Math.max(0, Number(p.percent) || 0));
+
+  /* overall bar: each phase fills the stretch from its own point to the next one */
+  var overall = Math.min(100, ((phase - 1) + percent / 100) / 3 * 100);
+  document.getElementById("fill").style.width = overall + "%";
+
+  /* timeline points */
+  document.querySelectorAll(".point").forEach(function(el){
+
+    var n = Number(el.getAttribute("data-point"));
+
+    el.classList.remove("current", "done", "future");
+
+    if (n < phase){
+      el.classList.add("done");
+      el.firstChild.textContent = "\n●\n";
+    } else if (n === phase){
+      el.classList.add("current");
+      el.firstChild.textContent = "\n●\n";
+    } else {
+      el.classList.add("future");
+      el.firstChild.textContent = "\n○\n";
+    }
+
+  });
+
+  /* phase boxes */
+  var currentName = "";
+
+  document.querySelectorAll(".phase").forEach(function(el){
+
+    var n = Number(el.getAttribute("data-phase"));
+    var h = el.querySelector("h3");
+
+    h.textContent = h.textContent.replace(/\s*\((Current|Done)\)\s*$/, "");
+
+    if (n === phase){
+      h.textContent += " (Current)";
+      currentName = el.getAttribute("data-name");
+    } else if (n < phase){
+      h.textContent += " (Done)";
+    }
+
+  });
+
+  /* status text */
+  document.getElementById("status").innerHTML =
+    "🔵 Currently working on:<br>Phase " + phase + " - " + currentName +
+    "<br><br>Progress: " + percent + "%";
+
+}
+
+
+render(PROGRESS);
+
+
+/* If a progress.json file exists next to this page, it overrides the values above */
+
+fetch("progress.json", { cache: "no-store" })
+  .then(function(r){ return r.ok ? r.json() : null; })
+  .then(function(data){ if (data) render(data); })
+  .catch(function(){});
+
+</script>
 
 </body>
 </html>
